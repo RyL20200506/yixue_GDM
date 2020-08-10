@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7204ba4-b5a6-4cc9-98a8-7640c6b6c48c" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,15 +29,20 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Crystal\Documents\GitHub\yixue_GDM\Navigation20200809" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
     </option>
   </component>
@@ -60,7 +64,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -71,9 +77,13 @@
       <screen x="0" y="0" width="2341" height="1194" />
     </state>
     <state x="602" y="388" key="FileChooserDialogImpl/0.0.2341.1194@0.0.2341.1194" timestamp="1596970569002" />
-    <state x="365" y="272" key="SettingsEditor" timestamp="1596968040383">
+    <state x="365" y="272" key="SettingsEditor" timestamp="1597054074286">
       <screen x="0" y="0" width="2341" height="1194" />
     </state>
-    <state x="365" y="272" key="SettingsEditor/0.0.2341.1194@0.0.2341.1194" timestamp="1596968040383" />
+    <state x="365" y="272" key="SettingsEditor/0.0.2341.1194@0.0.2341.1194" timestamp="1597054074286" />
+    <state x="382" y="443" key="com.intellij.ide.util.TipDialog" timestamp="1597054041054">
+      <screen x="0" y="0" width="2341" height="1194" />
+    </state>
+    <state x="382" y="443" key="com.intellij.ide.util.TipDialog/0.0.2341.1194@0.0.2341.1194" timestamp="1597054041054" />
   </component>
 </project>

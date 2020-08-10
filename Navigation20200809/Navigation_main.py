@@ -34,49 +34,54 @@ def Hex_to_RGB(hex):
 # Training Part
 ## Loading data
 data = pd.read_csv('data.txt', sep='\\s+')
-train_set = data.loc[:, ['风向参数x', '风向参数y']].values
+train_index = data.loc[:, ['风向参数x', '风向参数y']].values
 train_label0 = data.loc[:, ['对应的最佳偏航模式']].values
-train_label = np.reshape(train_label0,len(train_label0))
+train_label = np.reshape(train_label0, len(train_label0))
 ## Training
 neigh = KNeighborsClassifier(n_neighbors=3, weights='distance')  # weights可以尝试用'distance'
-neigh.fit(train_set, train_label)
+neigh.fit(train_index, train_label)
 
 # Verification Part
-X = [[11.3910, 21.53630], [9.59540, 16.75], [9.93, 14.72]]
-result = neigh.predict(X)
-print('分类结果:', result)
-print('概率预测:', neigh.predict_proba(X))
+data_vef = pd.read_csv('data_vef.txt', sep='\\s+')
+ver_index = data_vef.loc[:, ['风向参数x', '风向参数y']].values
+ver_label0 = data_vef.loc[:, ['对应的最佳偏航模式']].values
+ver_label = np.reshape(ver_label0, len(ver_label0))
+
+result = neigh.predict(ver_index)
+print('测试集:', data_vef)
+print('测试结果:', result)
+print('模型准确率', neigh.score(ver_index, ver_label))
 
 # Visualization
+plt.figure()
 prop_cycle = plt.rcParams['axes.prop_cycle']
 colors = prop_cycle.by_key()['color']
 num2colors_dict = {i+1: colors[i] for i in range(len(colors))}
 color_list_dot = []
 color_list_bac = []
+
+## Preparation
 for i in range(1, max(data['对应的最佳偏航模式'].values)+1):
     if len(data[data['对应的最佳偏航模式'] == i])>0:
-        dot_color = RGB_to_Hex(Hex_to_RGB(num2colors_dict[i]) + np.array([50, 0, 0]))
-        color_list_dot.append(dot_color)
         color_list_bac.append(num2colors_dict[i])
-        plt.scatter(data[data['对应的最佳偏航模式'] == i].iloc[:, 0], data[data['对应的最佳偏航模式'] == i].iloc[:, 1], c=dot_color, label=str(i))
 
-
-plt.figure()
-
-## scatter
-for i in range(1, max(data['对应的最佳偏航模式'].values)+1):
-    plt.scatter(data[data['对应的最佳偏航模式'] == i].iloc[:, 0], data[data['对应的最佳偏航模式'] == i].iloc[:, 1], c=color_list_dot[i], label=str(i))
-
-plt.legend()
-
-## background classify
-xx, yy = np.meshgrid(np.arange(min(train_set[:, 0]), max(train_set[:, 1]), 0.1),
-                     np.arange(min(train_set[:, 0]), max(train_set[:, 1]), 0.1))
+## Background classify
+xx, yy = np.meshgrid(np.arange(min(train_index[:, 0])-1, max(train_index[:, 1]+1), 0.1),
+                     np.arange(min(train_index[:, 0])-1, max(train_index[:, 1]+1), 0.1))
 coords = np.c_[xx.ravel(), yy.ravel()]
 Z = neigh.predict(coords)
 Z = Z.reshape(xx.shape)
 light_rgb = matplotlib.colors.ListedColormap(color_list_bac)
 plt.pcolormesh(xx, yy, Z, cmap=light_rgb)
+
+## Scatter
+for i in range(1, max(data['对应的最佳偏航模式'].values)+1):
+    if len(data[data['对应的最佳偏航模式'] == i])>0:
+        dot_color = RGB_to_Hex(Hex_to_RGB(num2colors_dict[i]) + np.array([-50, -50, -50]))
+        plt.scatter(data[data['对应的最佳偏航模式'] == i].iloc[:, 0], data[data['对应的最佳偏航模式'] == i].iloc[:, 1], c=dot_color, label=str(i))
+plt.legend()
+
+
 
 
 
