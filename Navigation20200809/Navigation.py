@@ -11,17 +11,20 @@ import pandas as pd
 import numpy as np
 
 # Training Part
-data = pd.read_csv('数据.txt', sep='\\s+')
+data = pd.read_csv('data.txt', sep='\\s+')
 train_set = data.loc[:, ['风向参数x', '风向参数y']].values
 
 train_label0 = data.loc[:, ['对应的最佳偏航模式']].values
 train_label = np.reshape(train_label0,len(train_label0))
 
-neigh = KNeighborsClassifier(n_neighbors=3)
+neigh = KNeighborsClassifier(n_neighbors=3, weights='uniform')  # weights可以尝试用'distance'
+
 neigh.fit(train_set, train_label)
 
 # Verification Part
 result = neigh.predict([[11.3910, 21.53630], [9.59540, 16.75], [9.93, 14.72]])
 print('分类结果', result)
+
+
 
 
